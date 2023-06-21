@@ -1,0 +1,148 @@
+﻿<Window x:Class="BusinessEvents.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusinessEvents"
+        mc:Ignorable="d"
+        Title="Business Events Planning System" Height="550" Width="800" >
+
+    <Grid>
+        <TabControl Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Name="TabItemSignUpForBusinessEvents" Header="Sign up for BusinessEvent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="1" Grid.Row="1" FontWeight="Bold" FontSize="18"  Content="Welcome to BEPS" />
+                    <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" FontWeight="SemiBold"  FontSize="16"  Content="Here you can find and sign up for a Business Event" Margin="0,0,0,20"/>
+                    
+                    <Label Grid.Column="1" Grid.Row="3" Content="Name:" Height="25"/>
+                    <TextBox Name="TxtNameOfParticipant" Grid.Column="1" Grid.Row="4" Height="20"/>
+                    <Label Grid.Column="1" Grid.Row="5" Content="Email:" Height="25"/>
+                    <TextBox Name="TxtEmailOfParticipant" Grid.Column="1" Grid.Row="6" Height="20"/>
+                    
+                    <Button x:Name="SignUpBtn" Content="Sign Up" Grid.Column="1" Grid.Row="9" Width="100" HorizontalAlignment="Left" Margin="0,20,10,10" IsEnabled="False" Click="SignUpBtn_Click"/>
+
+                    <GroupBox Header="Choose a BusinessEvent" Grid.Column="2" Grid.Row="3" Grid.RowSpan="8" Grid.ColumnSpan="4" Width="450" Margin="20,0,0,0" Height="320" VerticalAlignment="Top">
+                        <StackPanel Width="420" HorizontalAlignment="Center">
+                            <ComboBox  Name="DropDownOpenBusinessEvents" SelectionChanged="DropDownOpenBusinessEvents_SelectionChanged" Margin="10" Height="40">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding NameOfBusinessEvent}"/>
+                                            <TextBlock Text="{Binding DateOfBusinessEvent}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Label Content="Registation deadline:" Margin="10,0,10,0"/>
+                            <TextBlock Name="TxtShowRegistrationDeadline" Margin="15,0,10,0" Height="20" Text="{Binding ElementName=DropDownOpenBusinessEvents, Path=SelectedItem.RegistrationDeadline}" />
+                            <Label Content="Max number of participants:" Margin="10,0,10,0"/>
+                            <TextBlock Name="TxtShowMaxParticipants" Margin="15,0,10,0" Height="20" Text="{Binding ElementName=DropDownOpenBusinessEvents, Path=SelectedItem.MaxParticipants}"/>
+                            <Label Content="BusinessEvent description:" Margin="10,0,10,0"/>
+                            <ScrollViewer MaxHeight="100" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                                <TextBlock Name="TxtShowBusinessEventDescription" Margin="15,0,10,0" TextWrapping="Wrap" Text="{Binding ElementName=DropDownOpenBusinessEvents, Path=SelectedItem.BusinessEventDescription}" />
+                            </ScrollViewer>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Name="TabItemCreateBusinessEvents" Header="Create BusinessEvent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" FontWeight="Bold" FontSize="18" Content="Create a new BusinessEvent" />
+                    <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Content="Name of BusinessEvent:" />
+                    <Label Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Date of BusinessEvent:" Margin="0,10,0,0"/>
+                    <Label Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Content="Description of BusinessEvent:" Margin="0,10,0,0"/>
+                    <Label Grid.Column="4" Grid.Row="4" Content="Registration deadline:" Margin="0,10,0,0"/>
+                    <Label Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Content="Max number of participants:" Margin="0,10,0,0"/>
+                    <Label Grid.Column="2" Grid.Row="7" Margin="5" Content="*optional" FontWeight="Light" FontSize="9" HorizontalAlignment="Left"/>
+                    <DatePicker Name="CalRegistrationDeadline" Grid.Column="4" Grid.Row="5" Width="150" HorizontalAlignment="Left" Margin="5" FirstDayOfWeek="Monday"/>
+                    <DatePicker Name="CalDateOfBusinessEvent" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="150" Margin="5" HorizontalAlignment="Left" FirstDayOfWeek="Monday"/>
+                    <TextBox Name="TxtNameOfBusinessEvent" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" Height="21"/>
+                    <TextBox Name="TxtBusinessEventDescription" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="5,5,5,17" Height="50" MaxHeight="50" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"/>    
+                    <TextBox Name="TxtMaxParticipants" Grid.Column="1" Grid.Row="7" Margin="5" Width="50" Grid.ColumnSpan="2" HorizontalAlignment="Left" />
+                    <Button Name="Create_BusinessEvent" Grid.Column="7" Grid.Row="10" Content="Create" Height="20" Width="100" Margin="5" Click="Create_BusinessEvent_Click" VerticalAlignment="Bottom"/>
+                </Grid>
+            </TabItem>
+            <TabItem Name="TabItemPreviousBusinessEvents" Header="Previous BusinessEvents" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" IsReadOnly="True" Name="PreviousBusinessEventsDataGrid" VerticalScrollBarVisibility="Visible" IsEnabled="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Date of BusinessEvent" Width="160" Binding="{Binding DateOfBusinessEvent}"/>
+                            <DataGridTextColumn Header="Name of BusinessEvent" Width="*" Binding="{Binding NameOfBusinessEvent}"/>
+                            <DataGridTextColumn Header="Number of Participants" Width="140" Binding="{Binding NumberOfParticipants}"/>
+                            <DataGridTextColumn Header="Status of BusinessEvent" Width="140" Binding="{Binding CurrentStatus}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <RadioButton Name="RadioBtnPreviousBusinessEvents" Checked="RadioBtnPreviousBusinessEvents_Checked"  Grid.Column="1" Grid.Row="1" Content="All Previous BusinessEvents" IsChecked="True" Margin="10"/>
+                    <RadioButton Name="RadioBtnClosedBusinessEvents" Grid.Column="2" Grid.Row="1" Content="Closed BusinessEvents" Margin="10" Checked="RadioBtnClosedBusinessEvents_Checked"/>
+                    <RadioButton Name="RadioBtnFullyBookedBusinessEvents" Grid.Column="3" Grid.Row="1" Content="Fully Booked BusinessEvents" Margin="10" Checked="RadioBtnFullyBookedBusinessEvents_Checked"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
